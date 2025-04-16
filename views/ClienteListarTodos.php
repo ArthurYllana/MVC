@@ -1,35 +1,41 @@
-<!-- vai existir a variável $clientes -->
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listagem de Clientes</title>
 </head>
 <body>
-    <h1>Listagem de Clientes</h1>
+    <h2>Lista de Usuários</h2>
     <table>
         <thead>
             <tr>
-                <td>ID</td>
-                <td>Nome</td>
-                <td>E-mail</td>
-                <td>Telefone</td>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>Telefone</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
-            <!-- Criar uma repetição para exibir todos os clientes -->
-             <?php
-             while ($cliente = $clientes->fetch(PDO::FETCH_ASSOC)):
-                echo "<tr>";
-                echo "<td>".$cliente['ID']."</td>";
-                echo "<td>".$cliente['nome']."</td>";
-                echo "<td>".$cliente['email']."</td>";
-                echo "<td>".$cliente['telefone']."</td>";
-                echo "</tr>";
-             endwhile;
-             ?>
+            <?php while ($cliente = $clientes->fetch(PDO::FETCH_ASSOC)): ?>
+                <tr>
+                    <td><?= $cliente['ID'] ?></td>
+                    <td><?= $cliente['nome'] ?></td>
+                    <td><?= $cliente['email'] ?></td>
+                    <td><?= $cliente['telefone'] ?></td>
+                    <td class="action-buttons">
+                        <form method="post" style="display:inline;">
+                            <input type="hidden" name="id" value="<?= $cliente['ID'] ?>">
+                            <button type="submit" name="consultar">Editar</button>
+                        </form>
+                        <form method="post" style="display:inline;">
+                            <input type="hidden" name="id" value="<?= $cliente['ID'] ?>">
+                            <button type="submit" name="deletar" onclick="return confirm('Tem certeza que deseja deletar?')">Deletar</button>
+                        </form>
+                    </td>
+                </tr>
+            <?php endwhile; ?>
         </tbody>
     </table>
 </body>
