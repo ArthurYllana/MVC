@@ -38,11 +38,11 @@
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (isset($_POST['adicionar'])) {
                 $cliController->adicionar($_POST['nome'], $_POST['email'], $_POST['telefone']);
-            } elseif (isset($_POST['atualizar'])) {
+            } else if (isset($_POST['atualizar'])) {
                 $cliController->atualizar($_POST['id'], $_POST['nome'], $_POST['email'], $_POST['telefone']);
-            } elseif (isset($_POST['deletar'])) {
+            } else if (isset($_POST['deletar'])) {
                 $cliController->deletar($_POST['id']);
-            } elseif (isset($_POST['consultar'])) {
+            } else if (isset($_POST['consultar'])) {
                 $cliController->consultar($_POST['id']);
             }
         }
