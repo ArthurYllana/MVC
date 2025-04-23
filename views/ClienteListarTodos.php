@@ -20,17 +20,17 @@
         <tbody>
             <?php while ($cliente = $clientes->fetch(PDO::FETCH_ASSOC)): ?>
                 <tr>
-                    <td><?= $cliente['ID'] ?></td>
+                    <td><?= $cliente['id'] ?></td>
                     <td><?= $cliente['nome'] ?></td>
                     <td><?= $cliente['email'] ?></td>
                     <td><?= $cliente['telefone'] ?></td>
                     <td class="action-buttons">
                         <form method="post" style="display:inline;">
-                            <input type="hidden" name="id" value="<?= $cliente['ID'] ?>">
-                            <button type="submit" name="consultar">Editar</button>
+                            <input type="hidden" name="id" value="<?= $cliente['id'] ?>">
+                            <button type="submit" name="editar">Editar</button>
                         </form>
                         <form method="post" style="display:inline;">
-                            <input type="hidden" name="id" value="<?= $cliente['ID'] ?>">
+                            <input type="hidden" name="id" value="<?= $cliente['id'] ?>">
                             <button type="submit" name="deletar" onclick="return confirm('Tem certeza que deseja deletar?')">Deletar</button>
                         </form>
                     </td>

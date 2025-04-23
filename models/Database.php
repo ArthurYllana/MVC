@@ -2,7 +2,7 @@
 
 Class Database  {
     private $host = "localhost";
-    private $dbname = "aulaProgWeb";
+    private $dbname = "bancobd";
     private $user = "root";
     private $passwd = "";
 

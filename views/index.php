@@ -17,16 +17,17 @@
     
     <!-- Formulário para adicionar/editar usuário -->
     <form method="post" action="">
-        <input type="hidden" name="id" value="<?= isset($_POST['id']) ? $_POST['id'] : '' ?>">
-        <label>Nome: <input type="text" name="nome" required value="<?= isset($_POST['nome']) ? $_POST['nome'] : '' ?>"></label>
-        <label>Email: <input type="email" name="email" required value="<?= isset($_POST['email']) ? $_POST['email'] : '' ?>"></label>
-        <label>Telefone: <input type="text" name="telefone" required value="<?= isset($_POST['telefone']) ? $_POST['telefone'] : '' ?>"></label>
-        
-        <?php if(isset($_POST['id']) && !empty($_POST['id'])): ?>
-            <button type="submit" name="atualizar">Atualizar</button>
-            <button type="button" onclick="window.location.href=''">Cancelar</button>
-        <?php else: ?>
+        <input type="hidden" name="id" value="<?= isset($_POST['id']) ? $_POST['id'] : (isset($usuario['id']) ? $usuario['id'] : '') ?>">
+
+        <label>Nome: <input type="text" name="nome" required value="<?= isset($_POST['nome']) ? $_POST['nome'] : (isset($usuario['nome']) ? $usuario['nome'] : '') ?>"></label>
+        <label>Email: <input type="email" name="email" required value="<?= isset($_POST['email']) ? $_POST['email'] : (isset($usuario['email']) ? $usuario['email'] : '') ?>"></label>
+        <label>Telefone: <input type="text" name="telefone" required value="<?= isset($_POST['telefone']) ? $_POST['telefone'] : (isset($usuario['telefone']) ? $usuario['telefone'] : '') ?>"></label>
+
+        <!-- Condição para exibir o botão de adicionar ou atualizar -->
+        <?php if (isset($_POST['id']) && !empty($_POST['id'])): ?>
             <button type="submit" name="adicionar">Adicionar</button>
+        <?php else: ?>
+            <button type="submit" name="atualizar">Atualizar</button>
         <?php endif; ?>
     </form>
 
@@ -39,6 +40,7 @@
             if (isset($_POST['adicionar'])) {
                 $cliController->adicionar($_POST['nome'], $_POST['email'], $_POST['telefone']);
             } else if (isset($_POST['atualizar'])) {
+                // Verificar se está atualizado com o ID correto
                 $cliController->atualizar($_POST['id'], $_POST['nome'], $_POST['email'], $_POST['telefone']);
             } else if (isset($_POST['deletar'])) {
                 $cliController->deletar($_POST['id']);
@@ -49,6 +51,7 @@
 
         // Listar todos os usuários
         $cliController->listarTodos();
+
     ?>
 </body>
 </html>

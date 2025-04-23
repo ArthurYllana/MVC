@@ -2,7 +2,7 @@
 
 class Cliente {
     private $conexao;
-    private $tableName = "usurario";
+    private $tableName = "usuarios";
     public $id;
     public $nome;
     public $email;
