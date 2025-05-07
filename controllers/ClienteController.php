@@ -19,35 +19,39 @@ class ClienteController {
 
     public function adicionar($nome, $email, $telefone) {
         if ($this->clienteModel->inserir($nome, $email, $telefone)) {
-            echo "<p>Usuário adicionado com sucesso!</p>";
+            echo "<p class='success'>Usuário adicionado com sucesso!</p>";
         } else {
-            echo "<p>Erro ao adicionar usuário.</p>";
+            echo "<p class='error'>Erro ao adicionar usuário.</p>";
         }
     }
 
     public function atualizar($id, $nome, $email, $telefone) {
         if ($this->clienteModel->alterar($id, $nome, $email, $telefone)) {
-            echo "<p>Usuário atualizado com sucesso!</p>";
+            echo "<p class='success'>Usuário atualizado com sucesso!</p>";
         } else {
-            echo "<p>Erro ao atualizar usuário.</p>";
+            echo "<p class='error'>Erro ao atualizar usuário.</p>";
         }
     }
 
     public function deletar($id) {
         if ($this->clienteModel->apagar($id)) {
-            echo "<p>Usuário deletado com sucesso!</p>";
+            echo "<p class='success'>Usuário deletado com sucesso!</p>";
         } else {
-            echo "<p>Erro ao deletar usuário.</p>";
+            echo "<p class='error'>Erro ao deletar usuário.</p>";
         }
     }
 
-    public function consultar($id) {
+    public function editar($id) {
         $usuario = $this->clienteModel->buscar($id);
         if ($usuario) {
-            $_POST = array_merge($_POST, $usuario);
-            echo "<p>Usuário encontrado. Preencha o formulário para editar.</p>";
+            // Armazenar na sessão em vez de usar $GLOBALS
+            $_SESSION['usuario_edicao'] = $usuario;
+            header("Location: ../views/index.php"); // Redirecionar para o formulário
+            exit();
         } else {
-            echo "<p>Usuário não encontrado.</p>";
+            $_SESSION['mensagem'] = "<p class='error'>Usuário não encontrado.</p>";
+            header("Location: ../views/index.php");
+            exit();
         }
     }
 }

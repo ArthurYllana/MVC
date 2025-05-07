@@ -2,7 +2,7 @@
 
 Class Database  {
     private $host = "localhost";
-    private $dbname = "bancobd";
+    private $dbname = "clientes";
     private $user = "root";
     private $passwd = "";
 
